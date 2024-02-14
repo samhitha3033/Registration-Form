@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        background-image: url('reg.jpeg'); 
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 300px; 
+        margin: 100px auto; 
+        background: rgba(0, 0, 0, 0.8); 
+        padding: 10px 20px; 
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);  
+        background-image: linear-gradient(to bottom right, #ff6ac1, #00FFFF); 
+        background-size: cover;
+    }
+    .container h2 {
+        text-align: center;
+        color: white; 
+    }
+    .container form {
+        padding: 20px 0;
+    }
+    .container form input[type="text"],
+    .container form input[type="email"],
+    .container form input[type="password"] {
+        width: calc(100% - 40px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .container form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #144c4c; 
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .container form input[type="submit"]:hover {
+        background-color: #2a8d8f; 
+    }
+    .container form .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+    .container form .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    .container form .form-group label {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration</h2>
+        <form id="registrationForm" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <span id="usernameError" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span id="passwordError" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Re-enter Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span id="confirmPasswordError" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span id="emailError" class="error"></span>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var email = document.getElementById("email").value;
+            var isValid = true;
+
+            document.getElementById("usernameError").innerHTML = "";
+            document.getElementById("passwordError").innerHTML = "";
+            document.getElementById("confirmPasswordError").innerHTML = "";
+            document.getElementById("emailError").innerHTML = "";
+
+            if (username.length < 5) {
+                document.getElementById("usernameError").innerHTML = "Username must be at least 5 characters long.";
+                isValid = false;
+            }
+
+            if (password.length < 8) {
+                document.getElementById("passwordError").innerHTML = "Password must be at least 8 characters long.";
+                isValid = false;
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").innerHTML = "Passwords do not match.";
+                isValid = false;
+            }
+
+            if (!email.includes("@")) {
+                document.getElementById("emailError").innerHTML = "Invalid email address.";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
